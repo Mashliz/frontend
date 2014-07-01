@@ -1,0 +1,30 @@
+body {
+  font-size: 200%;
+  background: white;
+}
+
+div.test {
+  border-radius: 5px;
+  display: none;
+}
+
+.move {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: #000;
+}
+
+.test {
+  font-weight: bold;
+  color: red;
+}
+.test a {
+  color: #222;
+  float: left;
+}
+
+#canvas {
+  width: 100px;
+  height: 100px;
+}
