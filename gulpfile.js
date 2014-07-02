@@ -1,5 +1,8 @@
+/*#################################
+############# include #############
+#################################*/
 var gulp = require('gulp'),
-    autoprefixer = require('gulp-autoprefixer'),
+    prefix = require('gulp-autoprefixer'),
     plumber = require('gulp-plumber'),
     livereload = require('gulp-livereload'),
     connect = require('connect'),
@@ -7,28 +10,41 @@ var gulp = require('gulp'),
     coffee = require('gulp-coffee'),
     slim = require("gulp-slim"),
     gutil = require('gulp-util'),
+    jsmin = require('gulp-jsmin'),
+    cssmin = require('gulp-minify-css'),
+    rename = require('gulp-rename'),
     concat = require('gulp-concat');
 
+/*#################################
+############# filepath ############
+#################################*/
 var paths = {
   html: ['./*.html'],
-  scss: ['./scss/*.scss'],
+  scss: ['./css/*.scss'],
+  css:['./css/*.css'],
   coffee: ['./js/*.coffee'],
   js: ['./js/*.js'],
+  lib: ['./lib/*.js'],
   slim: ['./*.slim']
 };
-  
+
+/*#################################
+############# sserver #############
+#################################*/ 
 gulp.task('server', function(next) {
   var server = connect();
   server.use(connect.static('./')).listen(process.env.PORT || 8080, next);
 });
-  
+
+/*#################################
+############# wached #############
+#################################*/  
 gulp.task('compass', function() {
   gulp.src(paths.scss)
     .pipe(plumber())
     .pipe(compass({
-      config_file: './config.rb',
-      css: 'css',
-      sass: 'scss'
+      css: './css',
+      sass: './css'
     }))
     .pipe(livereload());
 });
@@ -42,12 +58,6 @@ gulp.task('slim', function(){
     .pipe(livereload());
 });
 
-gulp.task('scripts', function() {
-  gulp.src('./lib/*.js')
-    .pipe(concat('lib.js'))
-    .pipe(gulp.dest('./js/'));
-});
-  
 gulp.task('html', function () {
   gulp.src(paths.html)
     .pipe(livereload());
@@ -64,13 +74,48 @@ gulp.task('js', function() {
   gulp.src(paths.coffee)
     .pipe(livereload());
 })
-  
+
+/*#################################
+############# manual  #############
+#################################*/
+gulp.task('lib', function() {
+  gulp.src(paths.lib)
+    .pipe(concat('lib.js'))
+    .pipe(gulp.dest('./lib/'));
+});
+
+gulp.task('pre', function () {
+  gulp.src(paths.css)
+    .pipe(prefix(["last 1 version", "> 1%", "ie 8", "ie 7"], { cascade: true }))
+    .pipe(gulp.dest('./css/'));
+});
+
+gulp.task('mini', function() {
+/*
+  gulp.src(paths.js)
+    .pipe(jsmin())
+    .pipe(rename({suffix: '.min'}))
+    .pipe(gulp.dest('./js/'));
+*/
+  gulp.src(paths.css)
+    .pipe(cssmin({keepBreaks:true}))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(gulp.dest('./css/'));
+});
+
+/*#################################
+############# waching #############
+#################################*/
 gulp.task('watch', function() {
   gulp.watch(paths.js, ['js']);
   gulp.watch(paths.scss, ['compass']);
+  gulp.watch(paths.css, ['prefix']);
   gulp.watch(paths.coffee, ['coffee']);
   gulp.watch(paths.slim, ['slim']);  
 });
-  
+
+/*#################################
+############# default #############
+#################################*/ 
 gulp.task('default', ['server', 'watch']);
   
