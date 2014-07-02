@@ -1,5 +1,9 @@
+@import "compass";
+@include global-reset;
+
 .test { 
-  width:960px;
+  width:950px;
+  height: 900px;
   margin: auto;
   a {
     text-align: center;
@@ -11,4 +15,5 @@
   position: absolute;
   left:0;
   top:0;
+  z-index: 0;
 }

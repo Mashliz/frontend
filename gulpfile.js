@@ -12,6 +12,7 @@ var gulp = require('gulp'),
   gutil = require('gulp-util'),
   jsmin = require('gulp-jsmin'),
   cssmin = require('gulp-minify-css'),
+  htmlmin = require('gulp-htmlmin'),
   rename = require('gulp-rename'),
   concat = require('gulp-concat');
 
@@ -37,68 +38,73 @@ gulp.task('server', function(next) {
 });
 
 /*#################################
-############# wached #############
-#################################*/  
+############# wached ##############
+#################################*/
 gulp.task('compass', function() {
   gulp.src(paths.scss)
-  .pipe(plumber())
-  .pipe(compass({
-    css: './assets',
-    sass: './assets'
-  }))
-  .pipe(livereload());
+    .pipe(plumber())
+    .pipe(compass({
+      css: './assets',
+      sass: './assets'
+    }))
+    .pipe(gulp.dest("./assets"))
+    .pipe(livereload());
 });
  
 gulp.task('slim', function(){
   gulp.src(paths.slim)
-  .pipe(slim({
-    pretty: true
-  }))
-  .pipe(gulp.dest("./"))
-  .pipe(livereload());
+    .pipe(slim({
+      pretty: true
+    }))
+    .pipe(gulp.dest("./"))
+    .pipe(livereload());
 });
 
 gulp.task('html', function () {
   gulp.src(paths.html)
-  .pipe(livereload());
+    .pipe(livereload());
 });
 
 gulp.task('coffee', function() {
   gulp.src(paths.coffee)
-  .pipe(coffee({bare: true}).on('error', gutil.log))
-  .pipe(gulp.dest('./js/'))
-  .pipe(livereload());
+    .pipe(coffee({bare: true})
+    .on('error', gutil.log))
+    .pipe(gulp.dest('./js/'))
+    .pipe(livereload());
 });
 
 gulp.task('js', function() {
-  gulp.src(paths.coffee)
-  .pipe(livereload());
-})
+  gulp.src(paths.js)
+    .pipe(livereload());
+});
 
 /*#################################
 ############# manual  #############
 #################################*/
 gulp.task('concat', function() {
   gulp.src(paths.lib)
-  .pipe(concat('lib.js'))
-  .pipe(gulp.dest('./lib/'));
+    .pipe(concat('lib.js'))
+    .pipe(gulp.dest('./lib/'));
 });
 
 gulp.task('prefix', function () {
   gulp.src(paths.css)
-  .pipe(prefix(["last 1 version", "> 1%", "ie 8", "ie 7"], { cascade: true }))
-  .pipe(gulp.dest('./css/'));
+    .pipe(prefix(["last 1 version", "> 1%", "ie 8", "ie 7"], { cascade: true }))
+    .pipe(gulp.dest('./css/'));
 });
 
 gulp.task('minify', function() {
   gulp.src(paths.js)
-  .pipe(jsmin())
-  .pipe(rename({suffix: '.min'}))
-  .pipe(gulp.dest('./js/'));
+    .pipe(jsmin())
+    .pipe(rename({suffix: '.min'}))
+    .pipe(gulp.dest('./js/'));
   gulp.src(paths.css)
-  .pipe(cssmin({keepBreaks:true}))
-  .pipe(rename({suffix: '.min'}))
-  .pipe(gulp.dest('./css/'));
+    .pipe(cssmin({keepBreaks:true}))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(gulp.dest('./css/'));
+  gulp.src(paths.html)
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('./'))
 });
 
 /*#################################

@@ -88,7 +88,11 @@ function onFrame(event) {
     }
 }
 
-function onMouseDown(event) {}
+function onMouseDown(event) {
+  
+  cl(event.point)
+  
+}
 
 function cl(p) {
     console.log(p)
