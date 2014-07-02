@@ -3,16 +3,16 @@ html lang="ja"
   head
     meta charset="UTF-8"
     title testdocument
-    link rel="stylesheet" href="./css/style.css" title="main style" type="text/css" media="screen" charset="utf-8"
-    script src="./js/lib.js"
-    //script src="./js/main.js"
-    script src="./js/pap.js" type="text/paperscript" canvas="canvas"
+    link rel="stylesheet" href="./assets/style.css" title="main style" type="text/css" media="screen" charset="utf-8"
+    //link rel="stylesheet" href="./css/style.min.css" title="main style" type="text/css" media="screen" charset="utf-8"    
+    script src="./lib/lib.js"
+    //script src="./js/pap.min.js" type="text/paperscript" canvas="canvas"
+    script src="./assets/pap.js" type="text/paperscript" canvas="canvas"
   body
-
     div.test
       p.target testsetesstefesfatttt
       h1 testesfesa  
       ul
         li.test aaaaa
-    div
-      canvas#canvas resize=""
+    div.canvas
+      canvas#canvas resize="true" hidpi="off"

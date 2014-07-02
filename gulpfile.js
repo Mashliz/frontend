@@ -2,30 +2,30 @@
 ############# include #############
 #################################*/
 var gulp = require('gulp'),
-    prefix = require('gulp-autoprefixer'),
-    plumber = require('gulp-plumber'),
-    livereload = require('gulp-livereload'),
-    connect = require('connect'),
-    compass = require('gulp-compass'),
-    coffee = require('gulp-coffee'),
-    slim = require("gulp-slim"),
-    gutil = require('gulp-util'),
-    jsmin = require('gulp-jsmin'),
-    cssmin = require('gulp-minify-css'),
-    rename = require('gulp-rename'),
-    concat = require('gulp-concat');
+  prefix = require('gulp-autoprefixer'),
+  plumber = require('gulp-plumber'),
+  livereload = require('gulp-livereload'),
+  connect = require('connect'),
+  compass = require('gulp-compass'),
+  coffee = require('gulp-coffee'),
+  slim = require("gulp-slim"),
+  gutil = require('gulp-util'),
+  jsmin = require('gulp-jsmin'),
+  cssmin = require('gulp-minify-css'),
+  rename = require('gulp-rename'),
+  concat = require('gulp-concat');
 
 /*#################################
 ############# filepath ############
 #################################*/
 var paths = {
   html: ['./*.html'],
-  scss: ['./css/*.scss'],
-  css:['./css/*.css'],
-  coffee: ['./js/*.coffee'],
-  js: ['./js/*.js'],
-  lib: ['./lib/*.js'],
-  slim: ['./*.slim']
+  slim: ['./*.slim'],
+  lib: ['./libs/*.js'],
+  scss: ['./assets/*.scss'],
+  css:['./assets/*.css'],
+  coffee: ['./assets/*.coffee'],
+  js: ['./assets/*.js']
 };
 
 /*#################################
@@ -41,66 +41,64 @@ gulp.task('server', function(next) {
 #################################*/  
 gulp.task('compass', function() {
   gulp.src(paths.scss)
-    .pipe(plumber())
-    .pipe(compass({
-      css: './css',
-      sass: './css'
-    }))
-    .pipe(livereload());
+  .pipe(plumber())
+  .pipe(compass({
+    css: './assets',
+    sass: './assets'
+  }))
+  .pipe(livereload());
 });
  
 gulp.task('slim', function(){
   gulp.src(paths.slim)
-    .pipe(slim({
-      pretty: true
-    }))
-    .pipe(gulp.dest("./"))
-    .pipe(livereload());
+  .pipe(slim({
+    pretty: true
+  }))
+  .pipe(gulp.dest("./"))
+  .pipe(livereload());
 });
 
 gulp.task('html', function () {
   gulp.src(paths.html)
-    .pipe(livereload());
+  .pipe(livereload());
 });
 
 gulp.task('coffee', function() {
   gulp.src(paths.coffee)
-    .pipe(coffee({bare: true}).on('error', gutil.log))
-    .pipe(gulp.dest('./js/'))
-    .pipe(livereload());
+  .pipe(coffee({bare: true}).on('error', gutil.log))
+  .pipe(gulp.dest('./js/'))
+  .pipe(livereload());
 });
 
 gulp.task('js', function() {
   gulp.src(paths.coffee)
-    .pipe(livereload());
+  .pipe(livereload());
 })
 
 /*#################################
 ############# manual  #############
 #################################*/
-gulp.task('lib', function() {
+gulp.task('concat', function() {
   gulp.src(paths.lib)
-    .pipe(concat('lib.js'))
-    .pipe(gulp.dest('./lib/'));
+  .pipe(concat('lib.js'))
+  .pipe(gulp.dest('./lib/'));
 });
 
-gulp.task('pre', function () {
+gulp.task('prefix', function () {
   gulp.src(paths.css)
-    .pipe(prefix(["last 1 version", "> 1%", "ie 8", "ie 7"], { cascade: true }))
-    .pipe(gulp.dest('./css/'));
+  .pipe(prefix(["last 1 version", "> 1%", "ie 8", "ie 7"], { cascade: true }))
+  .pipe(gulp.dest('./css/'));
 });
 
-gulp.task('mini', function() {
-/*
+gulp.task('minify', function() {
   gulp.src(paths.js)
-    .pipe(jsmin())
-    .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest('./js/'));
-*/
+  .pipe(jsmin())
+  .pipe(rename({suffix: '.min'}))
+  .pipe(gulp.dest('./js/'));
   gulp.src(paths.css)
-    .pipe(cssmin({keepBreaks:true}))
-    .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest('./css/'));
+  .pipe(cssmin({keepBreaks:true}))
+  .pipe(rename({suffix: '.min'}))
+  .pipe(gulp.dest('./css/'));
 });
 
 /*#################################
@@ -109,7 +107,6 @@ gulp.task('mini', function() {
 gulp.task('watch', function() {
   gulp.watch(paths.js, ['js']);
   gulp.watch(paths.scss, ['compass']);
-  gulp.watch(paths.css, ['prefix']);
   gulp.watch(paths.coffee, ['coffee']);
   gulp.watch(paths.slim, ['slim']);  
 });

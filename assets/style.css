@@ -6,8 +6,6 @@
 /* line 4, style.scss */
 .test a {
   text-align: center;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
   border-radius: 5px;
 }
