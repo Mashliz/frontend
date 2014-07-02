@@ -21,7 +21,8 @@ var gulp = require('gulp'),
 #################################*/
 var paths = {
   html: ['./*.html'],
-  slim: ['./*.slim'],
+  top: ['./*.slim'],
+  pages: ['./pages/*.slim'],
   lib: ['./libs/*.js'],
   scss: ['./assets/*.scss'],
   css:['./assets/*.css'],
@@ -51,12 +52,21 @@ gulp.task('compass', function() {
     .pipe(livereload());
 });
  
-gulp.task('slim', function(){
-  gulp.src(paths.slim)
+gulp.task('top', function(){
+  gulp.src(paths.top)
     .pipe(slim({
       pretty: true
     }))
     .pipe(gulp.dest("./"))
+    .pipe(livereload());
+});
+
+gulp.task('pages', function(){
+  gulp.src(paths.pages)
+    .pipe(slim({
+      pretty: true
+    }))
+    .pipe(gulp.dest("./pages/"))
     .pipe(livereload());
 });
 
@@ -114,7 +124,8 @@ gulp.task('watch', function() {
   gulp.watch(paths.js, ['js']);
   gulp.watch(paths.scss, ['compass']);
   gulp.watch(paths.coffee, ['coffee']);
-  gulp.watch(paths.slim, ['slim']);  
+  gulp.watch(paths.top, ['top']);
+  gulp.watch(paths.pages, ['pages']);
 });
 
 /*#################################

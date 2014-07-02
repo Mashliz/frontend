@@ -63,24 +63,24 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 5, style.scss */
+/* line 5, paper.scss */
 body .test {
   display: block;
   width: 950px;
   height: 900px;
   margin: auto;
 }
-/* line 10, style.scss */
+/* line 10, paper.scss */
 body .test a {
   text-align: center;
   box-sizing: border-box;
   border-radius: 5px;
 }
-/* line 16, style.scss */
+/* line 16, paper.scss */
 body .test ul li {
   margin-bottom: 30px;
 }
-/* line 21, style.scss */
+/* line 21, paper.scss */
 body .canvas {
   position: fixed;
   left: 0;
