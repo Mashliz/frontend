@@ -69,7 +69,7 @@ gulp.task('coffee', function() {
   gulp.src(paths.coffee)
     .pipe(coffee({bare: true})
     .on('error', gutil.log))
-    .pipe(gulp.dest('./js/'))
+    .pipe(gulp.dest('./assets/'))
     .pipe(livereload());
 });
 

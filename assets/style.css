@@ -63,22 +63,26 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 4, style.scss */
-.test {
+/* line 5, style.scss */
+body .test {
+  display: block;
   width: 950px;
   height: 900px;
   margin: auto;
 }
-/* line 8, style.scss */
-.test a {
+/* line 10, style.scss */
+body .test a {
   text-align: center;
   box-sizing: border-box;
   border-radius: 5px;
 }
-
-/* line 14, style.scss */
-.canvas {
-  position: absolute;
+/* line 16, style.scss */
+body .test ul li {
+  margin-bottom: 30px;
+}
+/* line 21, style.scss */
+body .canvas {
+  position: fixed;
   left: 0;
   top: 0;
   z-index: 0;
