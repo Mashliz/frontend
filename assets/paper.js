@@ -15,6 +15,7 @@ var Ball = function () {
   this._moveDir;
   this._init();
 }
+
 Ball.prototype = {
   _init: function () {
     this._setUniqueParam();
@@ -24,8 +25,11 @@ Ball.prototype = {
     this._uParam = Math.random();
   },
   _setMoveParam: function () {
+   
     this._moveDist = Point.random() * view.size;
-    this._moveDir = (this._moveDist - this._body.position).abs();
+     cl(Point.random())
+     cl(view.size)
+    this._moveDir = this._moveDist - this._body.position;
     this._moveDir.length = moveDistLim * Math.random();
   },
   _createBody: function () {
@@ -35,6 +39,8 @@ Ball.prototype = {
       strokeColor: strCol,
       strokeWidth: strWid
     }
+    
+    
     this._setMoveParam();
   },
   _getColor: function () {
@@ -52,7 +58,8 @@ Ball.prototype = {
         colors.push(color);
       }
     }
-    return {
+    return "black";/*
+{
       gradient: {
         stops: colors,
         radial: true
@@ -60,6 +67,8 @@ Ball.prototype = {
       origin: this._body.position,
       destination: this._body.bounds.rightCenter
     }
+*/
+    
   },
   _getRadius: function () {
     return (this._uParam * maxRad) + minRad;
@@ -77,43 +86,46 @@ Ball.prototype = {
   }
 }
 
-for (var i = 0; i < ballNum; i++) {
-  balls.push(new Ball());
-}
 
-function onMouseMove(event) {
-  var hit = project.hitTest(event.point);
-}
 
-function onFrame(event) {
-  for (var i = 0; i < ballNum; i++) {
-    balls[i].moving();
-  }
-}
-
-function onMouseDown(event) {
-		var position = item.position;
-		var viewBounds = view.bounds;
-		if (position.isInside(viewBounds))
-			return;
-		var itemBounds = item.bounds;
-		if (position.x > viewBounds.width + 5) {
-			position.x = -item.bounds.width;
-		}
-
-		if (position.x < -itemBounds.width - 5) {
-			position.x = viewBounds.width;
-		}
-
-		if (position.y > viewBounds.height + 5) {
-			position.y = -itemBounds.height;
-		}
-
-		if (position.y < -itemBounds.height - 5) {
-			position.y = viewBounds.height
-		}
-}
 
 function cl(p) {
   console.log(p)
 }
+
+paper.install(window);
+
+(function($){
+  $(function(){
+		var canvas = document.getElementById('canvas');
+		paper.setup(canvas); 
+
+
+
+/*
+    for (var i = 0; i < ballNum; i++) {
+      balls.push(new Ball());
+    }
+*/
+    var test = new Ball("paper");
+
+    view.draw();
+    cl(test)
+    view.onMouseMove = function(event) {
+/*       var hit = project.hitTest(event.point); */
+    }
+    
+    view.onFrame = function(event) {
+/*
+      for (var i = 0; i < ballNum; i++) {
+        balls[i].moving();
+      }
+*/
+    }
+
+    
+    
+
+
+  });
+})(jQuery);
