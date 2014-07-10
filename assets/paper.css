@@ -65,24 +65,26 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 /* line 5, paper.scss */
 body .test {
+  background: rgba(255, 255, 255, 0.5);
   display: block;
   width: 950px;
   height: 900px;
   margin: auto;
 }
-/* line 10, paper.scss */
+/* line 11, paper.scss */
 body .test a {
   text-align: center;
   box-sizing: border-box;
   border-radius: 5px;
 }
-/* line 16, paper.scss */
+/* line 17, paper.scss */
 body .test ul li {
   margin-bottom: 30px;
 }
-/* line 21, paper.scss */
+/* line 22, paper.scss */
 body .canvas {
   position: fixed;
   left: 0;
   top: 0;
+  z-index: -1;
 }

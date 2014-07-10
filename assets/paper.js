@@ -1,8 +1,8 @@
-var ballNum = 10;
+var ballNum = 15;
 var colNum = 2;
 var minRad = 10;
 var maxRad = 200;
-var moveDistLim = 10;
+var moveDistLim = 50;
 var strCol = "#999999"
 var strWid = 0;
 var gParamNum = 10;
@@ -25,7 +25,7 @@ Ball.prototype = {
   },
   _setMoveParam: function () {
     this._moveDist = Point.random() * view.size;
-    this._moveDir = (this._moveDist - this._body.position).abs();
+    this._moveDir = this._moveDist - this._body.position;
     this._moveDir.length = moveDistLim * Math.random();
   },
   _createBody: function () {
@@ -41,7 +41,8 @@ Ball.prototype = {
     var colors = [];
     for (var i = 0; i < colNum; i++) {
       if (i === colNum - 1) {
-        colors.push(new Color(255, 255, 255, 0.0));
+        //colors.push(new Color(255, 255, 255, 0.0));
+        colors.push(new Color(0, 0, 0, 1.0));
       } else {
         var hue = Math.random() * 360;
         var color = {
@@ -68,17 +69,32 @@ Ball.prototype = {
     return Point.random() * view.size;
   },
   moving: function () {
-    if (this._body.bounds.left > view.size.width) {
-      this._body.position.x = -this._body.bounds.width;
-    } else if (this._body.bounds.left < -(this._body.bounds.width)) {
-      
-    }
+    
+		if (this._body.position.x > view.bounds.width + Math.ceil( this._body.bounds.width / 2 ) + this._moveDir.length) {
+			this._body.position.x = -Math.floor( this._body.bounds.width / 2 );
+		}
+
+		else if (this._body.position.x < -( Math.ceil( this._body.bounds.width / 2 ) + this._moveDir.length )) {
+			this._body.position.x = view.bounds.width + Math.floor( this._body.bounds.width / 2 );
+		}
+
+		else if (this._body.position.y > view.bounds.height + Math.ceil( this._body.bounds.width / 2 ) + this._moveDir.length) {
+			this._body.position.y = -Math.floor( this._body.bounds.width / 2 );
+		}
+
+		else if (this._body.position.y < -( Math.ceil( this._body.bounds.width / 2 ) + this._moveDir.length )) {
+			this._body.position.y = view.bounds.height + Math.floor( this._body.bounds.width / 2 );
+		}
+
     this._body.position += this._moveDir;
   }
 }
 
 for (var i = 0; i < ballNum; i++) {
+  $(".log").append("<li class='test"+i+"'></li>")    
+
   balls.push(new Ball());
+  
 }
 
 function onMouseMove(event) {
@@ -86,32 +102,17 @@ function onMouseMove(event) {
 }
 
 function onFrame(event) {
+if(event.count % 1 == 0){
   for (var i = 0; i < ballNum; i++) {
     balls[i].moving();
+    $(".test"+i).text(balls[i]._body.position)
+    
   }
+}
 }
 
 function onMouseDown(event) {
-		var position = item.position;
-		var viewBounds = view.bounds;
-		if (position.isInside(viewBounds))
-			return;
-		var itemBounds = item.bounds;
-		if (position.x > viewBounds.width + 5) {
-			position.x = -item.bounds.width;
-		}
 
-		if (position.x < -itemBounds.width - 5) {
-			position.x = viewBounds.width;
-		}
-
-		if (position.y > viewBounds.height + 5) {
-			position.y = -itemBounds.height;
-		}
-
-		if (position.y < -itemBounds.height - 5) {
-			position.y = viewBounds.height
-		}
 }
 
 function cl(p) {
