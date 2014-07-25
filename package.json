@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "coffee-script": "^1.7.1",
     "connect": "^2.15.0",
     "gulp": "^3.8.1",
     "gulp-autoprefixer": "0.0.7",
