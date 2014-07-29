@@ -1,0 +1,19 @@
+@import "compass";
+@include global-reset;
+body {
+  div {
+    @include box-sizing(border-box);
+  }
+  .test {
+    width: 200px;
+    >div {
+      border-radius: 2px;
+      float: left;
+   width: 100px;
+   
+      border: 1px solid #900;
+    }
+    text-align: center;
+    @include clearfix;
+  }   
+}

@@ -54,22 +54,20 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-body .test {
-  display: block;
-  width: 950px;
-  height: 900px;
-  margin: auto;
-}
-body .test a {
-  text-align: center;
+body div {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
-  border-radius: 5px;
 }
-body .test ul li {
-  margin-bottom: 30px;
+body .test {
+  width: 200px;
+  text-align: center;
+  overflow: hidden;
+  *zoom: 1;
 }
-body .canvas {
-  position: fixed;
-  left: 0;
-  top: 0;
+body .test > div {
+  border-radius: 2px;
+  float: left;
+  width: 100px;
+  border: 1px solid #900;
 }
