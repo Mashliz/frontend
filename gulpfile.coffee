@@ -69,7 +69,6 @@ gulp.task 'top', ->
   gulp.src targets.top
     .pipe slim
       pretty: true
-      options: "attr_quote=\"'\""
     .pipe gulp.dest dests.html
     .pipe livereload()
 
