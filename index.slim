@@ -6,6 +6,31 @@ html lang="ja"
     link rel="stylesheet" type="text/css" href="./assets/test.css"
     /script src="./assets/paper.js"
     title top
+    javascript:
+  
+      window.addEventListener("storage", function(evt) {
+        window.alert(evt.newValue)
+      })
+
+      var strg = localStorage;
+
+      strg.setItem("aaa", 111); // キーと値を設定
+      strg.setItem("bbb", true); 
+      strg.setItem("ccc", "hoge"); 
+
+      console.log( strg.length ); // 3 データの数
+
+      console.log( strg.getItem("aaa") ); // 111 キーを指定して値を取得
+
+      console.log( strg.key(0) ); // 番号を指定してキーを取得　※1
+
+      strg.removeItem("aaa"); // 指定したキーのデータを削除
+
+      console.log( strg.length ); // 2
+
+      strg.clear(); //全データを削除
+
+      console.log( strg.length ); // 0
   body
     div
       h1 frontend  
@@ -20,6 +45,7 @@ html lang="ja"
       canvas#canvas resize="true"
 
       img(width)
+
 
 
 
