@@ -28,17 +28,17 @@ targets =
   top: './*.slim'
   pages: './pages/*.slim'
   lib: './libs/*.js'
-  scss: './assets/*.sass'
-  css:'./assets/*.css'
+  scss: './*.scss'
+  css:'./*.css'
   coffee: './assets/*.coffee'
-  js: './assets/*.js'
+  js: './*.js'
 
 dests =
   html: './'
   assets: './assets'
   pages: './pages/'
-  css: './css/'
-  js: './js/'
+  css: './'
+  js: './'
   lib: './lib/'
 
 
@@ -57,13 +57,13 @@ gulp.task 'server', (next)->
 #################################
 
 gulp.task 'compass', ->
-  gulp.src targets.scss
-    .pipe plumber()
+  gulp.src "./*.scss"
+    .pipe plumber() 
     .pipe compass
-      config_file: './config.rb',
-    .on 'error', gutil.log
-    .pipe gulp.dest dests.assets
-    .pipe livereload()
+      css: './'
+      sass: './'
+    .pipe gulp.dest dests.html
+    .pipe livereload() 
 
 gulp.task 'top', ->
   gulp.src targets.top
