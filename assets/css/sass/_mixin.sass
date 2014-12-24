@@ -1,0 +1,10 @@
+@mixin sprite-r($name) 
+  background-image: $sprites
+  background-repeat: no-repeat
+  display: block
+  height: image-height(sprite-file($sprites, $name)) / 2
+  width: image-width(sprite-file($sprites, $name)) / 2
+  $ypos: round(nth(sprite-position($sprites, $name), 2) / 2)
+  background-position: 0 $ypos
+  @include background-size(100px auto)
+
