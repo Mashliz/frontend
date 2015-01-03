@@ -56,7 +56,7 @@ gulp.task 'compass', ->
       sass: dirs.sass
       image: dirs.img
     .on 'error', gutil.log
-    .pipe gulp.dest dirs.assets
+    .pipe gulp.dest dirs.css
     .pipe livereload()
   return
 

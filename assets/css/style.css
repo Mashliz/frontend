@@ -1,13 +1,12 @@
-.icons-sprite {
-  background-image: url('../img/icons-s12d078c470.png');
-  background-repeat: no-repeat;
-}
-
-body {
-  text-align: center;
-}
-
 .btn {
   color: red;
   background-size: 100%;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: block;
+  background-image: url('../img/icons-sfa8faee11f.png');
+  background-size: 269px 122.5px;
+  background-position: 0 -28px;
+  height: 95px;
+  width: 269px;
 }
