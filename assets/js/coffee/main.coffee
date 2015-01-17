@@ -1,6 +1,11 @@
-$ ->
-  new Masa()
-class Masa
+(($)->
+  $ ->
+    new Js()
+) jQuery
+
+cl = (o) -> console.log o 
+
+class Js
   constructor: (@test) ->
     @btn = $(".btn")
     @text = "testest"

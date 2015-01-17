@@ -1,22 +1,28 @@
-var Masa;
+var Js, cl;
 
-$(function() {
-  return new Masa();
-});
+(function($) {
+  return $(function() {
+    return new Js();
+  });
+})(jQuery);
 
-Masa = (function() {
-  function Masa(test) {
+cl = function(o) {
+  return console.log(o);
+};
+
+Js = (function() {
+  function Js(test) {
     this.test = test;
     this.btn = $(".btn");
     this.text = "testest";
     this.init();
   }
 
-  Masa.prototype.init = function() {
+  Js.prototype.init = function() {
     return this.cl();
   };
 
-  Masa.prototype.cl = function(b) {
+  Js.prototype.cl = function(b) {
     return this.btn.on("click", (function(_this) {
       return function() {
         return alert(_this.text);
@@ -24,6 +30,6 @@ Masa = (function() {
     })(this));
   };
 
-  return Masa;
+  return Js;
 
 })();

@@ -83,7 +83,7 @@ gulp.task 'coffee', ->
   gulp.src targets.coffee
     .pipe coffee 
       bare: true
-    .pipe gulp.dest dirs.js
+    .pipe gulp.dest dirs.jsmod
     .pipe livereload()
   return
 
