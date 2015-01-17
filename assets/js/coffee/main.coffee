@@ -6,12 +6,11 @@
 cl = (o) -> console.log o 
 
 class Js
-  constructor: (@test) ->
+  constructor: () ->
     @btn = $(".btn")
-    @text = "testest"
     @init()
   init: () ->
-    @cl()
-  cl: (b) ->
-    @btn.on "click", =>
-      alert @text
+    @test()
+  test: () ->
+    @btn.on "click", ->
+      alert("worked")

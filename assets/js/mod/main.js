@@ -11,23 +11,19 @@ cl = function(o) {
 };
 
 Js = (function() {
-  function Js(test) {
-    this.test = test;
+  function Js() {
     this.btn = $(".btn");
-    this.text = "testest";
     this.init();
   }
 
   Js.prototype.init = function() {
-    return this.cl();
+    return this.test();
   };
 
-  Js.prototype.cl = function(b) {
-    return this.btn.on("click", (function(_this) {
-      return function() {
-        return alert(_this.text);
-      };
-    })(this));
+  Js.prototype.test = function() {
+    return this.btn.on("click", function() {
+      return alert("worked");
+    });
   };
 
   return Js;
