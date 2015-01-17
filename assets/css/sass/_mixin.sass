@@ -1,0 +1,10 @@
+$icons-2x: sprite-map("icons/*.png", $layout: smart)
+@mixin use-sprite($sprite)
+  background-repeat: no-repeat
+  overflow: hidden
+  display: block
+  background-image: sprite-url($icons-2x)
+  background-size: (image-width(sprite-path($icons-2x)) / 2) (image-height(sprite-path($icons-2x)) / 2)
+  background-position: round(nth(sprite-position($icons-2x, $sprite), 1) / 2) round(nth(sprite-position($icons-2x, $sprite), 2) / 2)
+  height: image-height(sprite-file($icons-2x, $sprite)) / 2
+  width: image-width(sprite-file($icons-2x, $sprite)) / 2
