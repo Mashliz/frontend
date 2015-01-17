@@ -8,12 +8,12 @@ livereload =  require 'gulp-livereload'
 compass =     require 'gulp-compass'
 coffee =      require 'gulp-coffee'
 slim =        require "gulp-slim"
-gutil =       require 'gulp-util'
 jsmin =       require 'gulp-jsmin'
 cssmin =      require 'gulp-minify-css'
 htmlmin =     require 'gulp-htmlmin'
 rename =      require 'gulp-rename'
 concat =      require 'gulp-concat'
+prefix =      require 'gulp-autoprefixer'
 
 
 #################################
@@ -55,10 +55,6 @@ gulp.task 'compass', ->
       css: dirs.css
       sass: dirs.sass
       image: dirs.img
-    .on 'error', gutil.log
-    .pipe gulp.dest dirs.css
-    .pipe livereload()
-  return
 
 gulp.task 'top', ->
   gulp.src targets.top
@@ -76,17 +72,12 @@ gulp.task 'pages', ->
     .pipe livereload()
   return
 
-gulp.task 'html', ->
-  gulp.src targets.html
-    .pipe livereload()
-  return
-
-gulp.task 'coffee', ['concat'], ->
+gulp.task 'coffee', ->
   gulp.src targets.coffee
     .pipe coffee 
       bare: true
-    .on 'error', gutil.log
-    .pipe gulp.dest dirs.jsmod
+    .pipe gulp.dest dirs.js
+    .pipe livereload()
   return
 
 
@@ -98,6 +89,12 @@ gulp.task 'concat', ->
   gulp.src targets.jsmod
     .pipe concat 'all.js'
     .pipe gulp.dest dirs.js
+
+gulp.task 'pfix', ['compass'], ->
+  gulp.src targets.css
+    .pipe prefix()
+    .pipe gulp.dest dirs.css
+    .pipe livereload()
   return
 
 gulp.task 'minify', ->
@@ -124,7 +121,7 @@ gulp.task 'minify', ->
 #################################
 
 gulp.task 'watch', ->
-  gulp.watch targets.sass, ['compass']
+  gulp.watch targets.sass, ['compass', 'pfix']
   gulp.watch targets.coffee, ['coffee']
   gulp.watch targets.top, ['top']
   gulp.watch targets.pages, ['pages']

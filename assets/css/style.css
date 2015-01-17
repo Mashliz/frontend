@@ -9,4 +9,7 @@
   background-position: 0 -28px;
   height: 95px;
   width: 269px;
+  text-align: center;
+  -webkit-transition: scale(1);
+          transition: scale(1);
 }
