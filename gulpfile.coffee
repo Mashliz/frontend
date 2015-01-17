@@ -56,6 +56,13 @@ gulp.task 'compass', ->
       sass: dirs.sass
       image: dirs.img
 
+gulp.task 'pfix', ['compass'], ->
+  gulp.src targets.css
+    .pipe prefix()
+    .pipe gulp.dest dirs.css
+    .pipe livereload()
+  return
+
 gulp.task 'top', ->
   gulp.src targets.top
     .pipe slim
@@ -89,12 +96,6 @@ gulp.task 'concat', ->
   gulp.src targets.jsmod
     .pipe concat 'all.js'
     .pipe gulp.dest dirs.js
-
-gulp.task 'pfix', ['compass'], ->
-  gulp.src targets.css
-    .pipe prefix()
-    .pipe gulp.dest dirs.css
-    .pipe livereload()
   return
 
 gulp.task 'minify', ->
