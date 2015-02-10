@@ -13,4 +13,5 @@ class Js
     @test()
   test: () ->
     @btn.on "click", ->
-      alert("worked")
+      alert("worked")1
+      alert 1
