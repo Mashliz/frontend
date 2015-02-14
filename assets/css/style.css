@@ -1,7 +1,4 @@
-body {
-  background: #fff;
-}
-body .btn {
+.btn {
   color: red;
   background-size: 100%;
   background-repeat: no-repeat;
@@ -13,6 +10,6 @@ body .btn {
   height: 95px;
   width: 269px;
   text-align: center;
-  -webkit-transition: scale(526);
-          transition: scale(526);
+  -webkit-transition: scale(1);
+          transition: scale(1);
 }
